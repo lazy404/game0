@@ -1,3 +1,7 @@
+#!/usr/bin/env python
+#
+# Gierka Julka i Taty
+
 import pygame
 
 def make_font(fonts, size):
