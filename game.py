@@ -41,9 +41,12 @@ font_preferences = ["Comic Sans MS", "Impact", "Helvetica"]
 pygame.mixer.init()
 
 sounds={}
-import glob
+import glob, random
 
 default_sound=pygame.mixer.Sound('sounds/default.wav')
+julek_sound=pygame.mixer.Sound('sounds/julek.wav')
+nie=pygame.mixer.Sound('sounds/nie.wav')
+
 for i in glob.glob('sounds/?.wav'):
     print 'Loading', i
     sounds[i[7:8].upper()]=pygame.mixer.Sound(i)
@@ -52,6 +55,8 @@ font_size=mode[1]/2
 text = create_text("Julek", font_preferences, font_size, (254, 216, 1))
 
 cur_klawisz='?'
+julek_sound.play()
+fill=(31, 102, 224)
 
 while not done:
     for event in pygame.event.get():
@@ -69,8 +74,9 @@ while not done:
                     cur_sound=sounds.get(klawisz, default_sound)
                     c=cur_sound.play()
                     cur_klawisz=klawisz
-    
-    screen.fill((31, 102, 224))
+                    fill=(random.randrange(1,255), random.randrange(1,255),random.randrange(1,255))
+    print fill
+    screen.fill(fill)
     screen.blit(text, (mode[0]/2 - text.get_width() // 2, mode[1]/2 - text.get_height() // 2))
     
     pygame.display.flip()
