@@ -36,14 +36,20 @@ screen = pygame.display.set_mode(mode, pygame.FULLSCREEN)
 clock = pygame.time.Clock()
 done = False
 
-font_preferences = ["Impact", "Helvetica"]
+font_preferences = ["Comic Sans MS", "Impact", "Helvetica"]
 
 pygame.mixer.init()
-sounds={}
-default_sound=pygame.mixer.Sound('sounds/a.wav')
 
-font_size=mode[1]/3
-text = create_text("Julek", font_preferences, font_size, (180, 128, 0))
+sounds={}
+import glob
+
+default_sound=pygame.mixer.Sound('sounds/default.wav')
+for i in glob.glob('sounds/?.wav'):
+    print 'Loading', i
+    sounds[i[7:8].upper()]=pygame.mixer.Sound(i)
+
+font_size=mode[1]/2
+text = create_text("Julek", font_preferences, font_size, (254, 216, 1))
 
 cur_klawisz='?'
 
@@ -59,12 +65,12 @@ while not done:
                     continue
                 klawisz=chr(event.key).upper()
                 if klawisz.isalpha():
-                    text = create_text(chr(event.key).upper(), font_preferences, font_size, (180, 128, 0))
+                    text = create_text(chr(event.key).upper(), font_preferences, font_size, (254, 216, 1))
                     cur_sound=sounds.get(klawisz, default_sound)
                     c=cur_sound.play()
                     cur_klawisz=klawisz
     
-    screen.fill((255, 255, 255))
+    screen.fill((31, 102, 224))
     screen.blit(text, (mode[0]/2 - text.get_width() // 2, mode[1]/2 - text.get_height() // 2))
     
     pygame.display.flip()
