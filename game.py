@@ -55,6 +55,8 @@ while not done:
             if event.key == pygame.K_ESCAPE:
                 done = True
             else:
+                if event.key > 128:
+                    continue
                 klawisz=chr(event.key).upper()
                 if klawisz.isalpha():
                     text = create_text(chr(event.key).upper(), font_preferences, font_size, (180, 128, 0))
