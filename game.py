@@ -60,7 +60,9 @@ text = create_text("Julek", font_preferences, font_size, (254, 216, 1))
 
 cur_klawisz='?'
 julek_sound.play()
+global fill
 fill=(31, 102, 224)
+c=None
 
 while not done:
     for event in pygame.event.get():
@@ -73,13 +75,12 @@ while not done:
                 if event.key > 128:
                     continue
                 klawisz=chr(event.key).upper()
-                if klawisz.isalpha():
+                if klawisz.isalpha() and ( c == None or not c.get_busy()):
                     text = create_text(chr(event.key).upper(), font_preferences, font_size, (254, 216, 1))
                     cur_sound=sounds.get(klawisz, default_sound)
                     c=cur_sound.play()
                     cur_klawisz=klawisz
                     fill=(random.randrange(1,255), random.randrange(1,255),random.randrange(1,255))
-    print fill
     screen.fill(fill)
     screen.blit(text, (mode[0]/2 - text.get_width() // 2, mode[1]/2 - text.get_height() // 2))
     
