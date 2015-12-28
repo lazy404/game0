@@ -75,7 +75,7 @@ while not done:
                 if event.key > 128:
                     continue
                 klawisz=chr(event.key).upper()
-                if klawisz.isalpha() and ( c == None or not c.get_busy()):
+                if klawisz.isalnum() and ( c == None or not c.get_busy()):
                     text = create_text(chr(event.key).upper(), font_preferences, font_size, (254, 216, 1))
                     cur_sound=sounds.get(klawisz, default_sound)
                     c=cur_sound.play()
